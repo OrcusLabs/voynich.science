@@ -1,158 +1,160 @@
-Voynich Export Tool
+# Voynich Export Tool
 
-A desktop GUI utility for exporting filtered transcriptions from voynich_transcriptions.json.
-
-This tool allows you to:
-
-Load a Voynich JSON container
-
-Filter by Source
-
-Filter by Transcriber
-
-Filter by Folio
-
-Select text view (raw, normalized, splat)
-
-Export to JSON, CSV, or TXT
+Desktop GUI utility for exporting filtered transcriptions from `voynich_transcriptions.json`.
 
 Built with Python + Tkinter. No external dependencies.
 
-Expected Input File
+---
 
-The application expects a JSON file structured like:
+## Overview
 
-voynich_transcriptions.json
+This tool allows you to:
 
+- Load a Voynich transcription container
+- Filter by **Source**
+- Filter by **Transcriber**
+- Filter by **Folio**
+- Select text view (`raw`, `normalized`, `splat`)
+- Export to **JSON**, **CSV**, or **TXT**
+
+The application is read-only. It never modifies the source JSON.
+
+---
+
+## Input File
+
+The application expects a structured transcription file such as:
+
+`voynich_transcriptions.json`
 
 The JSON must contain:
 
-sources
+- `sources`
+- `transcribers`
+- `pages`
+  - `lines`
+  - optional `blocks`
+  - nested `sources`
+  - nested `views`
 
-transcribers
+If your file uses a different name, simply browse and select it.
 
-pages
+---
 
-lines
+## Requirements
 
-optional blocks
+- Python 3.9+
+- Tkinter (included with standard Python distributions)
 
-nested sources
+Check Python version:
 
-nested views
-
-If your file is named differently, you can browse and select it manually.
-
-Installation
-
-Requires Python 3.9+
-
-No additional packages required.
-
+```
 python --version
+```
 
+---
 
-Tkinter is included with standard Python distributions.
+## Running the Application
 
-Running the Application
+```
 python voynich_export.py
-
+```
 
 When the window opens:
 
-Click Browse
+1. Click **Browse**
+2. Select `voynich_transcriptions.json`
+3. Click **Load**
+4. Select filters
+5. Choose output format
+6. Click **Export**
 
-Select voynich_transcriptions.json
+---
 
-Click Load
+## Interface
 
-Choose filters
+### Voynich JSON
+Select and load the transcription container.
 
-Choose output format
+### Sources
+Lists available source IDs.
 
-Click Export
+Selecting one or more sources enables the Transcribers list.
 
-Interface Overview
-Voynich JSON
+### Transcribers
+Populates only after a source is selected.
 
-Select and load your transcription container file.
-
-Sources
-
-Lists available source IDs extracted from the JSON.
-
-Selecting a source enables the Transcribers list.
-
-Transcribers
-
-Populates only after one or more sources are selected.
-
-Shows:
-
+Display format:
+```
 <transcriber_id> | <name>
+```
 
-Folios
-
-Lists folios sorted in natural order (f1r, f1v, f2r, etc.).
+### Folios
+Natural-sorted folio list (`f1r`, `f1v`, `f2r`, etc.).
 
 “All folios” is enabled by default.
 
-View Modes
-Mode	Description
-raw	Direct record value
-normalized	Normalized text
-splat	Tokenized/splat version
-Export Formats
-JSON
+---
 
-Structured export:
+## View Modes
 
+| Mode        | Description |
+|-------------|-------------|
+| raw         | Direct record value |
+| normalized  | Normalized text |
+| splat       | Tokenized/splat representation |
+
+---
+
+## Export Formats
+
+### JSON
+
+```
 {
   "exported_utc": "...",
   "view": "...",
   "records": [...]
 }
+```
 
-CSV
+### CSV
 
 Columns:
 
-folio
+- folio
+- line
+- source_id
+- source_key
+- transcriber_id
+- view
+- text
+- locator_json
 
-line
+### TXT
 
-source_id
+Tab-separated format:
 
-source_key
-
-transcriber_id
-
-view
-
-text
-
-locator_json
-
-TXT
-
-Tab-separated rows:
-
+```
 folio    line    source_id    source_key    transcriber_id    text    locator_json
+```
 
-Selection Logic
+---
 
-If no sources are selected → all sources are included.
+## Selection Logic
 
-If transcribers are selected → sources are filtered to match those transcribers.
+- No sources selected → all sources exported
+- Transcribers selected → sources filtered to those transcribers
+- “All folios” enabled → full manuscript export
+- “All folios” disabled → only selected folios exported
 
-If “All folios” is enabled → entire manuscript exports.
+---
 
-If disabled → only selected folios export.
+## Data Model Assumptions
 
-Data Model Assumptions
+The exporter assumes a nested structure like:
 
-The exporter assumes the following nested structure:
-
+```
 pages
   └── folio_id
         ├── lines
@@ -164,39 +166,21 @@ pages
         │                       ├── views
         │                       └── locator
         └── blocks (optional)
+```
 
+If your schema differs, extraction logic may need adjustment.
 
-If your schema differs, the extraction logic may need adjustment.
+---
 
-Design Notes
+## Repository Layout
 
-Transcribers list is intentionally empty until a source is selected.
+```
+voynich-export/
+├── voynich_export.py
+├── voynich_transcriptions.json
+└── README.md
+```
 
-Folios are sorted using a natural folio key (f<nr><r|v><optional index>).
+---
 
-Export is read-only; the input JSON is never modified.
-
-No caching. Everything reads fresh from the loaded JSON.
-
-Example Use Cases
-
-Export normalized Takahashi lines for specific folios.
-
-Compare raw vs normalized across transcribers.
-
-Generate CSV for statistical analysis.
-
-Produce filtered text corpora for entropy or ED analysis.
-
-File Naming
-
-Recommended repo layout:
-
-/voynich-export
-    voynich_export.py
-    voynich_transcriptions.json
-    README.md
-
-License
-
-MIT
+## License
