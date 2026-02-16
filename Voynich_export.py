@@ -148,29 +148,28 @@ class ExportApp(tk.Tk):
         self.status_var.set(f"Loaded {os.path.basename(path)}: {len(self.sources)} sources, {len(self.folios)} folios.")
 
     def _refresh_transcribers(self):
+        # Only rebuild when the user actually has a source selection.
         selected_sources = self._selected_sources()
 
+        # If no sources are selected, do NOT blank the list during listbox churn.
+        # (Tkinter can emit selection events during redraw that momentarily report empty selection.)
         if not selected_sources:
-            self.tr_list.delete(0, tk.END)
             return
 
-        if selected_sources:
-            self.last_selected_sources = selected_sources
-        sig = tuple(sorted(selected_sources)) if selected_sources else None
+        # If the selected sources signature changed, rebuild the list.
+        sig = tuple(sorted(selected_sources))
         if sig != self.last_sources_signature:
+            self.last_sources_signature = sig
+            self.tr_list.delete(0, tk.END)
             self.tr_list.selection_clear(0, tk.END)
             self.last_selected_transcribers = []
-            self.last_sources_signature = sig
-        else:
-            selected_sources = self.last_selected_sources
 
-        self.tr_list.delete(0, tk.END)
-        for t in self.transcribers:
-            sid = t.get("source_id")
-            if selected_sources and sid not in selected_sources:
-                continue
-            label = f"{t.get('id','')} | {t.get('name','')}"
-            self.tr_list.insert(tk.END, label)
+            for t in self.transcribers:
+                sid = t.get("source_id")
+                if sid not in selected_sources:
+                    continue
+                label = f"{t.get('id','')} | {t.get('name','')}"
+                self.tr_list.insert(tk.END, label)
 
     def _selected_sources(self):
         idx = self.src_list.curselection()
@@ -181,14 +180,12 @@ class ExportApp(tk.Tk):
     def _selected_transcribers(self):
         idx = self.tr_list.curselection()
         if not idx:
-            return list(self.last_selected_transcribers)
+            return []
         out = []
         for i in idx:
             label = self.tr_list.get(i)
             tid = label.split("|", 1)[0].strip()
             out.append(tid)
-        if out:
-            self.last_selected_transcribers = out
         return out
 
     def _selected_folios(self):
