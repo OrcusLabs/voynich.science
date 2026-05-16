@@ -1,0 +1,448 @@
+{
+  "name": "standard_page_rules_v1",
+  "source": "/mnt/data/scribe1_position_heatmaps/scribe1_position_heatmap_tables.json",
+  "method": {
+    "purpose": "Condense raw 10x10 positional heatmaps into standard generator rules.",
+    "page_phases": {
+      "page_opening": {
+        "rows": [
+          0
+        ],
+        "range": [
+          0.0,
+          0.1
+        ]
+      },
+      "early_page": {
+        "rows": [
+          1,
+          2
+        ],
+        "range": [
+          0.1,
+          0.3
+        ]
+      },
+      "mid_page": {
+        "rows": [
+          3,
+          4,
+          5
+        ],
+        "range": [
+          0.3,
+          0.6
+        ]
+      },
+      "late_page": {
+        "rows": [
+          6,
+          7,
+          8
+        ],
+        "range": [
+          0.6,
+          0.9
+        ]
+      },
+      "page_end": {
+        "rows": [
+          9
+        ],
+        "range": [
+          0.9,
+          1.0
+        ]
+      }
+    },
+    "line_zones": {
+      "line_start": {
+        "cols": [
+          0
+        ],
+        "range": [
+          0.0,
+          0.1
+        ]
+      },
+      "line_body": {
+        "cols": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "range": [
+          0.1,
+          0.8
+        ]
+      },
+      "line_end": {
+        "cols": [
+          8,
+          9
+        ],
+        "range": [
+          0.8,
+          1.0
+        ]
+      }
+    },
+    "smoothing": "aggregate feature counts within rule cell, then Bayes-shrink toward global feature rate with prior_n=75.0",
+    "operation_weights": "external_copy/external_ed1/local_copy/local_ed1 plus seed=0.035, normalized within each rule cell",
+    "note": "Features are originally non-mutually-exclusive; operation weights are scheduler weights, not manuscript percentages."
+  },
+  "global_feature_probabilities": {
+    "external_exact_copy": 0.181486,
+    "external_ed1": 0.511462,
+    "local_exact_copy": 0.211126,
+    "local_ed1": 0.421375,
+    "initial_gallows": 0.090524,
+    "internal_gallows": 0.378449
+  },
+  "rules": {
+    "page_opening": {
+      "line_start": {
+        "support_tokens": 142.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.141067,
+          "external_ed1": 0.444054,
+          "local_exact_copy": 0.07297,
+          "local_ed1": 0.16407,
+          "initial_gallows": 0.381518,
+          "internal_gallows": 0.305916
+        },
+        "operation_weights": {
+          "external_copy": 0.164575,
+          "external_ed1": 0.518052,
+          "local_copy": 0.08513,
+          "local_ed1": 0.191411,
+          "seed": 0.040833
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.381518,
+          "internal_gallows": 0.305916
+        }
+      },
+      "line_body": {
+        "support_tokens": 518.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.152802,
+          "external_ed1": 0.496391,
+          "local_exact_copy": 0.045252,
+          "local_ed1": 0.137611,
+          "initial_gallows": 0.070471,
+          "internal_gallows": 0.459332
+        },
+        "operation_weights": {
+          "external_copy": 0.176231,
+          "external_ed1": 0.572502,
+          "local_copy": 0.05219,
+          "local_ed1": 0.15871,
+          "seed": 0.040367
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.070471,
+          "internal_gallows": 0.459332
+        }
+      },
+      "line_end": {
+        "support_tokens": 62.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.172347,
+          "external_ed1": 0.440581,
+          "local_exact_copy": 0.144777,
+          "local_ed1": 0.289074,
+          "initial_gallows": 0.071455,
+          "internal_gallows": 0.345866
+        },
+        "operation_weights": {
+          "external_copy": 0.159318,
+          "external_ed1": 0.407275,
+          "local_copy": 0.133832,
+          "local_ed1": 0.267221,
+          "seed": 0.032354
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.071455,
+          "internal_gallows": 0.345866
+        }
+      }
+    },
+    "early_page": {
+      "line_start": {
+        "support_tokens": 218.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.169322,
+          "external_ed1": 0.526825,
+          "local_exact_copy": 0.135954,
+          "local_ed1": 0.305813,
+          "initial_gallows": 0.070953,
+          "internal_gallows": 0.400627
+        },
+        "operation_weights": {
+          "external_copy": 0.144361,
+          "external_ed1": 0.449159,
+          "local_copy": 0.115911,
+          "local_ed1": 0.260729,
+          "seed": 0.02984
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.070953,
+          "internal_gallows": 0.400627
+        }
+      },
+      "line_body": {
+        "support_tokens": 953.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.194175,
+          "external_ed1": 0.530505,
+          "local_exact_copy": 0.137971,
+          "local_ed1": 0.311871,
+          "initial_gallows": 0.06497,
+          "internal_gallows": 0.41477
+        },
+        "operation_weights": {
+          "external_copy": 0.160538,
+          "external_ed1": 0.438608,
+          "local_copy": 0.114071,
+          "local_ed1": 0.257846,
+          "seed": 0.028937
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.06497,
+          "internal_gallows": 0.41477
+        }
+      },
+      "line_end": {
+        "support_tokens": 200.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.151314,
+          "external_ed1": 0.48858,
+          "local_exact_copy": 0.115762,
+          "local_ed1": 0.267648,
+          "initial_gallows": 0.075597,
+          "internal_gallows": 0.343213
+        },
+        "operation_weights": {
+          "external_copy": 0.142978,
+          "external_ed1": 0.461663,
+          "local_copy": 0.109384,
+          "local_ed1": 0.252903,
+          "seed": 0.033072
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.075597,
+          "internal_gallows": 0.343213
+        }
+      }
+    },
+    "mid_page": {
+      "line_start": {
+        "support_tokens": 346.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.155847,
+          "external_ed1": 0.535296,
+          "local_exact_copy": 0.146875,
+          "local_ed1": 0.41711,
+          "initial_gallows": 0.16102,
+          "internal_gallows": 0.376208
+        },
+        "operation_weights": {
+          "external_copy": 0.120799,
+          "external_ed1": 0.414917,
+          "local_copy": 0.113845,
+          "local_ed1": 0.323309,
+          "seed": 0.027129
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.16102,
+          "internal_gallows": 0.376208
+        }
+      },
+      "line_body": {
+        "support_tokens": 1440.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.205024,
+          "external_ed1": 0.53093,
+          "local_exact_copy": 0.226953,
+          "local_ed1": 0.474326,
+          "initial_gallows": 0.08567,
+          "internal_gallows": 0.375171
+        },
+        "operation_weights": {
+          "external_copy": 0.139261,
+          "external_ed1": 0.360629,
+          "local_copy": 0.154156,
+          "local_ed1": 0.322181,
+          "seed": 0.023773
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.08567,
+          "internal_gallows": 0.375171
+        }
+      },
+      "line_end": {
+        "support_tokens": 264.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.166996,
+          "external_ed1": 0.446489,
+          "local_exact_copy": 0.2296,
+          "local_ed1": 0.37641,
+          "initial_gallows": 0.064275,
+          "internal_gallows": 0.304967
+        },
+        "operation_weights": {
+          "external_copy": 0.133118,
+          "external_ed1": 0.355911,
+          "local_copy": 0.183022,
+          "local_ed1": 0.30005,
+          "seed": 0.0279
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.064275,
+          "internal_gallows": 0.304967
+        }
+      }
+    },
+    "late_page": {
+      "line_start": {
+        "support_tokens": 330.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.166942,
+          "external_ed1": 0.514468,
+          "local_exact_copy": 0.236628,
+          "local_ed1": 0.492847,
+          "initial_gallows": 0.080961,
+          "internal_gallows": 0.445392
+        },
+        "operation_weights": {
+          "external_copy": 0.11546,
+          "external_ed1": 0.355815,
+          "local_copy": 0.163656,
+          "local_ed1": 0.340862,
+          "seed": 0.024207
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.080961,
+          "internal_gallows": 0.445392
+        }
+      },
+      "line_body": {
+        "support_tokens": 1450.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.18204,
+          "external_ed1": 0.509088,
+          "local_exact_copy": 0.307432,
+          "local_ed1": 0.576789,
+          "initial_gallows": 0.092977,
+          "internal_gallows": 0.36812
+        },
+        "operation_weights": {
+          "external_copy": 0.113044,
+          "external_ed1": 0.316135,
+          "local_copy": 0.19091,
+          "local_ed1": 0.358176,
+          "seed": 0.021734
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.092977,
+          "internal_gallows": 0.36812
+        }
+      },
+      "line_end": {
+        "support_tokens": 277.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.163669,
+          "external_ed1": 0.478294,
+          "local_exact_copy": 0.263734,
+          "local_ed1": 0.416486,
+          "initial_gallows": 0.05622,
+          "internal_gallows": 0.336317
+        },
+        "operation_weights": {
+          "external_copy": 0.120595,
+          "external_ed1": 0.352417,
+          "local_copy": 0.194325,
+          "local_ed1": 0.306875,
+          "seed": 0.025789
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.05622,
+          "internal_gallows": 0.336317
+        }
+      }
+    },
+    "page_end": {
+      "line_start": {
+        "support_tokens": 118.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.168971,
+          "external_ed1": 0.509635,
+          "local_exact_copy": 0.232303,
+          "local_ed1": 0.464265,
+          "initial_gallows": 0.050722,
+          "internal_gallows": 0.39577
+        },
+        "operation_weights": {
+          "external_copy": 0.119823,
+          "external_ed1": 0.361399,
+          "local_copy": 0.164733,
+          "local_ed1": 0.329225,
+          "seed": 0.02482
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.050722,
+          "internal_gallows": 0.39577
+        }
+      },
+      "line_body": {
+        "support_tokens": 433.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.221676,
+          "external_ed1": 0.536141,
+          "local_exact_copy": 0.355973,
+          "local_ed1": 0.595675,
+          "initial_gallows": 0.086199,
+          "internal_gallows": 0.327527
+        },
+        "operation_weights": {
+          "external_copy": 0.127074,
+          "external_ed1": 0.307338,
+          "local_copy": 0.204059,
+          "local_ed1": 0.341466,
+          "seed": 0.020063
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.086199,
+          "internal_gallows": 0.327527
+        }
+      },
+      "line_end": {
+        "support_tokens": 98.0,
+        "feature_probabilities": {
+          "external_exact_copy": 0.176945,
+          "external_ed1": 0.510749,
+          "local_exact_copy": 0.236037,
+          "local_ed1": 0.460134,
+          "initial_gallows": 0.068146,
+          "internal_gallows": 0.349039
+        },
+        "operation_weights": {
+          "external_copy": 0.124709,
+          "external_ed1": 0.35997,
+          "local_copy": 0.166356,
+          "local_ed1": 0.324297,
+          "seed": 0.024668
+        },
+        "gallows_probabilities": {
+          "initial_gallows": 0.068146,
+          "internal_gallows": 0.349039
+        }
+      }
+    }
+  }
+}

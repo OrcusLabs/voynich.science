@@ -1,186 +1,161 @@
-# Voynich Export Tool
+# Voynich Manuscript Generator and Analysis Tools
 
-Desktop GUI utility for exporting filtered transcriptions from `voynich_transcriptions.json`.
+This repository contains the primary generator, analyzer, transcription data, and supporting tools used in the study of constrained generative models for the Voynich Manuscript.
 
-Built with Python + Tkinter. No external dependencies.
+The project focuses on:
 
----
+* local copy/mutate generation behavior,
+* adjacency legality constraints ("ledger" systems),
+* source-pool inheritance,
+* positional structure,
+* and manuscript-wide ecological analysis.
 
-## Overview
-
-This tool allows you to:
-
-- Load a Voynich transcription container
-- Filter by **Source**
-- Filter by **Transcriber**
-- Filter by **Folio**
-- Select text view (`raw`, `normalized`, `splat`)
-- Export to **JSON**, **CSV**, or **TXT**
-
-The application is read-only. It never modifies the source JSON.
+This repository does **not** claim a definitive decipherment of the Voynich Manuscript. The included tools and datasets are intended for computational and structural analysis of manuscript production behavior.
 
 ---
 
-## Input File
+# Core Files
 
-The application expects a structured transcription file such as:
+## Voynich_Generator_v10_12.py
 
-`voynich_transcriptions.json`
+Primary manuscript generator.
 
-The JSON must contain:
+Generates synthetic Voynich-style text using:
 
-- `sources`
-- `transcribers`
-- `pages`
-  - `lines`
-  - optional `blocks`
-  - nested `sources`
-  - nested `views`
+* adjacency legality constraints,
+* local copy/mutate behavior,
+* source-pool inheritance,
+* positional rules,
+* and page-level ecological constraints.
 
-If your file uses a different name, simply browse and select it.
+This is the primary experimental generator used in the associated research.
 
 ---
 
-## Requirements
+## Voynich_Analyzer_v1.py
 
-- Python 3.9+
-- Tkinter (included with standard Python distributions)
+Primary analysis engine.
 
-Check Python version:
+Analyzes Voynich transcription data for:
 
-```
-python --version
-```
-
----
-
-## Running the Application
-
-```
-python voynich_export.py
-```
-
-When the window opens:
-
-1. Click **Browse**
-2. Select `voynich_transcriptions.json`
-3. Click **Load**
-4. Select filters
-5. Choose output format
-6. Click **Export**
+* exact-copy behavior,
+* edit-distance relationships,
+* source-page inheritance,
+* sheet/quire reduction,
+* local vs external derivation,
+* and manuscript ecological structure.
 
 ---
 
-## Interface
+# Data Files
 
-### Voynich JSON
-Select and load the transcription container.
+## TTLI.json
 
-### Sources
-Lists available source IDs.
+Primary Takahashi-derived Voynich transcription dataset used throughout the project.
 
-Selecting one or more sources enables the Transcribers list.
-
-### Transcribers
-Populates only after a source is selected.
-
-Display format:
-```
-<transcriber_id> | <name>
-```
-
-### Folios
-Natural-sorted folio list (`f1r`, `f1v`, `f2r`, etc.).
-
-“All folios” is enabled by default.
+Contains folio, line, and token-level transcription data.
 
 ---
 
-## View Modes
+## Voynich_Transcriptions.json
 
-| Mode        | Description |
-|-------------|-------------|
-| raw         | Direct record value |
-| normalized  | Normalized text |
-| splat       | Tokenized/splat representation |
+Data file used by `Voynich_Transcription_Export_v2.py` to export multiple Voynich transcriptions into JSON files.
 
 ---
 
-## Export Formats
+## mappings_v3.json
 
-### JSON
+Primary mapping database generated from transcription analysis.
 
-```
-{
-  "exported_utc": "...",
-  "view": "...",
-  "records": [...]
-}
-```
+Contains:
 
-### CSV
-
-Columns:
-
-- folio
-- line
-- source_id
-- source_key
-- transcriber_id
-- view
-- text
-- locator_json
-
-### TXT
-
-Tab-separated format:
-
-```
-folio    line    source_id    source_key    transcriber_id    text    locator_json
-```
+* token relationships,
+* parent associations,
+* edit-distance structures,
+* source relationships,
+* and supporting metadata used by the analyzer and generator.
 
 ---
 
-## Selection Logic
+## mappings_TTLI.json
 
-- No sources selected → all sources exported
-- Transcribers selected → sources filtered to those transcribers
-- “All folios” enabled → full manuscript export
-- “All folios” disabled → only selected folios exported
+Alternative or earlier TTLI-based mappings dataset retained for comparison and validation purposes.
 
 ---
 
-## Data Model Assumptions
+## Ledger_scribe1.json
 
-The exporter assumes a nested structure like:
+Primary adjacency legality ledger.
 
-```
-pages
-  └── folio_id
-        ├── lines
-        │     └── line_id
-        │           └── sources
-        │                 └── source_key
-        │                       ├── source_id
-        │                       ├── transcriber_id
-        │                       ├── views
-        │                       └── locator
-        └── blocks (optional)
-```
+Defines legal glyph and token transition behavior used by the generator system.
 
-If your schema differs, extraction logic may need adjustment.
+Includes structural constraints and first-character statistical weighting derived from the manuscript.
 
 ---
 
-## Repository Layout
+## standard_page_rules_v1.json
 
-```
-voynich-export/
-├── voynich_export.py
-├── voynich_transcriptions.json
-└── README.md
-```
+Page-level structural rules and statistical constraints used during generation.
+
+Includes:
+
+* positional weighting,
+* line structure behavior,
+* and manuscript formatting constraints.
 
 ---
 
-## License
+## Quires_Scribes.json
+
+Metadata file containing:
+
+* quire assignments,
+* scribal associations,
+* Currier-style classifications,
+* and manuscript grouping information.
+
+Used by the analyzer and generator systems.
+
+---
+
+# Supporting Tools
+
+## Ledger_Generator_GUI_v1.py
+
+GUI tool for generating and editing ledger structures from transcription data.
+
+Used to construct adjacency legality systems for generation experiments.
+
+---
+
+## Create_Mappings_Gui_v1.py
+
+GUI tool for generating mapping datasets from transcription sources and metadata files.
+
+Used to create analyzer-ready relationship structures.
+
+---
+
+## Voynich_Transcription_Export_v2.py
+
+Utility tool used to export Voynich transcription sources into repository-compatible JSON transcription datasets.
+
+Used to generate files such as:
+
+* `TTLI.json`
+* `ZLZB.json`
+
+from the source transcription data contained in `Voynich_Transcriptions.json`.
+
+---
+
+# Notes
+
+The repository is intended primarily for:
+
+* computational linguistics,
+* manuscript ecology analysis,
+* generative modeling,
+* and Voynich Manuscript structural research.
+
+The included tools are research and experimental systems rather than polished production software.

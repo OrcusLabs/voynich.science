@@ -1,0 +1,716 @@
+[
+  {
+    "Quire": 1,
+    "Sheet": 1,
+    "Folio": 1,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 1,
+    "Sheet": 2,
+    "Folio": 2,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 1,
+    "Sheet": 3,
+    "Folio": 3,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 1,
+    "Sheet": 4,
+    "Folio": 4,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 1,
+    "Sheet": 4,
+    "Folio": 5,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 1,
+    "Sheet": 3,
+    "Folio": 6,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 1,
+    "Sheet": 2,
+    "Folio": 7,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 1,
+    "Sheet": 1,
+    "Folio": 8,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 2,
+    "Sheet": 1,
+    "Folio": 9,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 2,
+    "Sheet": 2,
+    "Folio": 10,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 2,
+    "Sheet": 3,
+    "Folio": 11,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 2,
+    "Sheet": 4,
+    "Folio": 13,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 2,
+    "Sheet": 3,
+    "Folio": 14,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 2,
+    "Sheet": 2,
+    "Folio": 15,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 2,
+    "Sheet": 1,
+    "Folio": 16,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 3,
+    "Sheet": 1,
+    "Folio": 17,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 3,
+    "Sheet": 2,
+    "Folio": 18,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 3,
+    "Sheet": 3,
+    "Folio": 19,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 3,
+    "Sheet": 4,
+    "Folio": 20,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 3,
+    "Sheet": 4,
+    "Folio": 21,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 3,
+    "Sheet": 3,
+    "Folio": 22,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 3,
+    "Sheet": 2,
+    "Folio": 23,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 3,
+    "Sheet": 1,
+    "Folio": 24,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 4,
+    "Sheet": 1,
+    "Folio": 25,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 4,
+    "Sheet": 2,
+    "Folio": 26,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 4,
+    "Sheet": 3,
+    "Folio": 27,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 4,
+    "Sheet": 4,
+    "Folio": 28,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 4,
+    "Sheet": 4,
+    "Folio": 29,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 4,
+    "Sheet": 3,
+    "Folio": 30,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 4,
+    "Sheet": 2,
+    "Folio": 31,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 4,
+    "Sheet": 1,
+    "Folio": 32,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 5,
+    "Sheet": 1,
+    "Folio": 33,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 5,
+    "Sheet": 2,
+    "Folio": 34,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 5,
+    "Sheet": 3,
+    "Folio": 35,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 5,
+    "Sheet": 4,
+    "Folio": 36,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 5,
+    "Sheet": 4,
+    "Folio": 37,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 5,
+    "Sheet": 3,
+    "Folio": 38,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 5,
+    "Sheet": 2,
+    "Folio": 39,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 5,
+    "Sheet": 1,
+    "Folio": 40,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 6,
+    "Sheet": 1,
+    "Folio": 41,
+    "Currier_Language": "B",
+    "Scribe": "5"
+  },
+  {
+    "Quire": 6,
+    "Sheet": 2,
+    "Folio": 42,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 6,
+    "Sheet": 3,
+    "Folio": 43,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 6,
+    "Sheet": 4,
+    "Folio": 44,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 6,
+    "Sheet": 4,
+    "Folio": 45,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 6,
+    "Sheet": 3,
+    "Folio": 46,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 6,
+    "Sheet": 2,
+    "Folio": 47,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 6,
+    "Sheet": 1,
+    "Folio": 48,
+    "Currier_Language": "B",
+    "Scribe": "5"
+  },
+  {
+    "Quire": 7,
+    "Sheet": 1,
+    "Folio": 49,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 7,
+    "Sheet": 2,
+    "Folio": 50,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 7,
+    "Sheet": 3,
+    "Folio": 51,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 7,
+    "Sheet": 4,
+    "Folio": 52,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 7,
+    "Sheet": 4,
+    "Folio": 53,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 7,
+    "Sheet": 3,
+    "Folio": 54,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 7,
+    "Sheet": 2,
+    "Folio": 55,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 7,
+    "Sheet": 1,
+    "Folio": 56,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 8,
+    "Sheet": 1,
+    "Folio": 57,
+    "Currier_Language": "B",
+    "Scribe": "5/1"
+  },
+  {
+    "Quire": 8,
+    "Sheet": 2,
+    "Folio": 58,
+    "Currier_Language": "A",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 8,
+    "Sheet": 2,
+    "Folio": 65,
+    "Currier_Language": "A",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 8,
+    "Sheet": 1,
+    "Folio": 66,
+    "Currier_Language": "B",
+    "Scribe": "5"
+  },
+  {
+    "Quire": 9,
+    "Sheet": 1,
+    "Folio": 67,
+    "Currier_Language": NaN,
+    "Scribe": "4"
+  },
+  {
+    "Quire": 9,
+    "Sheet": 1,
+    "Folio": 68,
+    "Currier_Language": NaN,
+    "Scribe": "4"
+  },
+  {
+    "Quire": 10,
+    "Sheet": 1,
+    "Folio": 69,
+    "Currier_Language": NaN,
+    "Scribe": "4"
+  },
+  {
+    "Quire": 10,
+    "Sheet": 1,
+    "Folio": 70,
+    "Currier_Language": NaN,
+    "Scribe": "4"
+  },
+  {
+    "Quire": 11,
+    "Sheet": 1,
+    "Folio": 71,
+    "Currier_Language": NaN,
+    "Scribe": "4"
+  },
+  {
+    "Quire": 11,
+    "Sheet": 1,
+    "Folio": 72,
+    "Currier_Language": NaN,
+    "Scribe": "4"
+  },
+  {
+    "Quire": 12,
+    "Sheet": 1,
+    "Folio": 73,
+    "Currier_Language": NaN,
+    "Scribe": "4"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 1,
+    "Folio": 75,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 2,
+    "Folio": 76,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 3,
+    "Folio": 77,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 4,
+    "Folio": 78,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 5,
+    "Folio": 79,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 5,
+    "Folio": 80,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 4,
+    "Folio": 81,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 3,
+    "Folio": 82,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 2,
+    "Folio": 83,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 13,
+    "Sheet": 1,
+    "Folio": 84,
+    "Currier_Language": "B",
+    "Scribe": "2"
+  },
+  {
+    "Quire": 14,
+    "Sheet": 1,
+    "Folio": 85,
+    "Currier_Language": NaN,
+    "Scribe": "2, 4"
+  },
+  {
+    "Quire": 14,
+    "Sheet": 1,
+    "Folio": 86,
+    "Currier_Language": NaN,
+    "Scribe": "2, 4"
+  },
+  {
+    "Quire": 15,
+    "Sheet": 1,
+    "Folio": 87,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 15,
+    "Sheet": 2,
+    "Folio": 88,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 15,
+    "Sheet": 2,
+    "Folio": 89,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 15,
+    "Sheet": 1,
+    "Folio": 90,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 17,
+    "Sheet": 1,
+    "Folio": 93,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 17,
+    "Sheet": 2,
+    "Folio": 94,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 17,
+    "Sheet": 2,
+    "Folio": 95,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 17,
+    "Sheet": 1,
+    "Folio": 96,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 19,
+    "Sheet": 1,
+    "Folio": 99,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 19,
+    "Sheet": 2,
+    "Folio": 100,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 19,
+    "Sheet": 2,
+    "Folio": 101,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 19,
+    "Sheet": 1,
+    "Folio": 102,
+    "Currier_Language": "A",
+    "Scribe": "1"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 1,
+    "Folio": 103,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 2,
+    "Folio": 104,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 3,
+    "Folio": 105,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 4,
+    "Folio": 106,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 5,
+    "Folio": 107,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 6,
+    "Folio": 108,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 6,
+    "Folio": 111,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 5,
+    "Folio": 112,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 4,
+    "Folio": 113,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 3,
+    "Folio": 114,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 2,
+    "Folio": 115,
+    "Currier_Language": "B",
+    "Scribe": "3 (2 on 115r)"
+  },
+  {
+    "Quire": 20,
+    "Sheet": 1,
+    "Folio": 116,
+    "Currier_Language": "B",
+    "Scribe": "3"
+  }
+]
