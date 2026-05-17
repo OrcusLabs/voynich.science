@@ -763,7 +763,7 @@ def analyze_folio(words, target_page, args):
 
 def folio_to_index(folio):
     """
-    Convert folio IDs like f27r / f27v into a simple numeric sequence.
+    Convert folio IDs like f27r / f27v / f85r1 into a simple numeric sequence.
 
     f1r = 2
     f1v = 3
@@ -771,7 +771,7 @@ def folio_to_index(folio):
     f2v = 5
     etc.
     """
-    match = re.match(r"^f?(\d+)([rv])$", str(folio))
+    match = re.match(r"^f?(\d+)([rv])(?:[A-Za-z0-9]*)$", str(folio))
     if not match:
         raise ValueError(f"Cannot convert folio to index: {folio}")
 
