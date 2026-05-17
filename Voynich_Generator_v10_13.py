@@ -23,9 +23,11 @@ FAMILY_BOOST_FACTOR = 1.35
 
 EDGE_EDIT_BONUS = 1.50
 
-DEFAULT_PAGE_LINES = 28
-DEFAULT_LINE_WORDS_MIN = 7
-DEFAULT_LINE_WORDS_MAX = 13
+TARGET_WORDS_MIN = 75
+TARGET_WORDS_MAX = 88
+MAX_WORDS_LINE_MIN = 5
+MAX_WORDS_LINE_MAX = 9
+TEXT_SEED_LINE_WORDS = 13
 
 RANDOM_SEED = None
 
@@ -74,9 +76,11 @@ MAX_FALLBACK_RETRIES = 50
 LOCAL_MEMORY_WINDOW = 120
 FAMILY_BOOST_FACTOR = 1.35
 EDGE_EDIT_BONUS = 1.50
-DEFAULT_PAGE_LINES = 28
-DEFAULT_LINE_WORDS_MIN = 7
-DEFAULT_LINE_WORDS_MAX = 13
+TARGET_WORDS_MIN = 75
+TARGET_WORDS_MAX = 88
+MAX_WORDS_LINE_MIN = 5
+MAX_WORDS_LINE_MAX = 9
+TEXT_SEED_LINE_WORDS = 13
 RANDOM_SEED = None
 
 
@@ -274,26 +278,33 @@ GUI_KNOBS = {
         "step": 0.05,
         "description": "Legacy bonus for edge-position edits.",
     },
-    "DEFAULT_PAGE_LINES": {
-        "value": DEFAULT_PAGE_LINES,
+    "TARGET_WORDS_MIN": {
+        "value": TARGET_WORDS_MIN,
         "min": 1,
-        "max": 80,
+        "max": 300,
         "step": 1,
-        "description": "Legacy default number of lines per page.",
+        "description": "Minimum generated tokens per page.",
     },
-    "DEFAULT_LINE_WORDS_MIN": {
-        "value": DEFAULT_LINE_WORDS_MIN,
+    "TARGET_WORDS_MAX": {
+        "value": TARGET_WORDS_MAX,
         "min": 1,
-        "max": 30,
+        "max": 300,
         "step": 1,
-        "description": "Legacy default minimum words per line.",
+        "description": "Maximum generated tokens per page.",
     },
-    "DEFAULT_LINE_WORDS_MAX": {
-        "value": DEFAULT_LINE_WORDS_MAX,
+    "MAX_WORDS_LINE_MIN": {
+        "value": MAX_WORDS_LINE_MIN,
         "min": 1,
         "max": 40,
         "step": 1,
-        "description": "Legacy default maximum words per line.",
+        "description": "Minimum generated line capacity before wrapping.",
+    },
+    "MAX_WORDS_LINE_MAX": {
+        "value": MAX_WORDS_LINE_MAX,
+        "min": 1,
+        "max": 40,
+        "step": 1,
+        "description": "Maximum generated line capacity before wrapping.",
     },
     "RANDOM_SEED": {
         "value": "",
@@ -865,8 +876,8 @@ def text_seed_records_from_words(selected: Sequence[str], folio: str = "f1r") ->
     line_no = 1
     index = 0
     while index < len(selected) or (not records and selected == []):
-        line_tokens = selected[index:index + DEFAULT_LINE_WORDS_MAX]
-        index += DEFAULT_LINE_WORDS_MAX
+        line_tokens = selected[index:index + TEXT_SEED_LINE_WORDS]
+        index += TEXT_SEED_LINE_WORDS
         records.append({"line": str(line_no), "text": " ".join(line_tokens)})
         line_no += 1
         if index >= len(selected):
@@ -1298,7 +1309,11 @@ class PlausibleGenerator:
     def generate_page(self, folio: str) -> List[Dict[str, Any]]:
         source_folios, _anchor = self.source_schedule(folio)
         source = SourceModel(folio, source_folios, self.pages, self.global_token_counts)
-        target_words = self.rng.randint(75, 88)
+        target_words_min = max(1, int(TARGET_WORDS_MIN))
+        target_words_max = max(target_words_min, int(TARGET_WORDS_MAX))
+        max_words_line_min = max(1, int(MAX_WORDS_LINE_MIN))
+        max_words_line_max = max(max_words_line_min, int(MAX_WORDS_LINE_MAX))
+        target_words = self.rng.randint(target_words_min, target_words_max)
         records: List[Dict[str, Any]] = []
         page_tokens: List[str] = []
         active_families: Counter = Counter()
@@ -1306,7 +1321,7 @@ class PlausibleGenerator:
         paragraph_plan = self.create_paragraph_plan(target_words)
         paragraph_starts = paragraph_plan["starts"]
         while len(page_tokens) < target_words:
-            max_words_line = self.rng.randint(5, 9)
+            max_words_line = self.rng.randint(max_words_line_min, max_words_line_max)
             remaining = target_words - len(page_tokens)
             line_target = min(remaining, max_words_line)
             line_tokens: List[str] = []
@@ -2042,9 +2057,10 @@ class GeneratorGUI:
         (
             "Basic Layout",
             [
-                "DEFAULT_PAGE_LINES",
-                "DEFAULT_LINE_WORDS_MIN",
-                "DEFAULT_LINE_WORDS_MAX",
+                "TARGET_WORDS_MIN",
+                "TARGET_WORDS_MAX",
+                "MAX_WORDS_LINE_MIN",
+                "MAX_WORDS_LINE_MAX",
                 "PARAGRAPH_MODEL_ENABLED",
                 "PARAGRAPH_MIN_LINES",
                 "PARAGRAPH_MAX_LINES",
