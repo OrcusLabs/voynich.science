@@ -93,6 +93,44 @@ def load_transcription(path):
     return data["records"]
 
 
+def strip_gutenberg_boilerplate(text):
+    start_re = re.compile(r"^\s*\*\*\*\s*START OF (?:THE|THIS) PROJECT GUTENBERG EBOOK\b.*$", re.IGNORECASE | re.MULTILINE)
+    end_re = re.compile(r"^\s*\*\*\*\s*END OF (?:THE|THIS) PROJECT GUTENBERG EBOOK\b.*$", re.IGNORECASE | re.MULTILINE)
+
+    start = start_re.search(text)
+    if start:
+        text = text[start.end():]
+
+    end = end_re.search(text)
+    if end:
+        text = text[:end.start()]
+
+    return text.strip()
+
+
+def load_gutenberg_text_records(path, words_per_line=12, lines_per_folio=40):
+    with open(path, "r", encoding="utf-8-sig") as handle:
+        text = handle.read()
+
+    text = strip_gutenberg_boilerplate(text)
+    tokens = [match.group(0).lower() for match in re.finditer(r"[A-Za-z]+", text)]
+    if not tokens:
+        raise ValueError(f"No alphabetic words found in text file: {path}")
+
+    records = []
+    for line_index, start in enumerate(range(0, len(tokens), words_per_line), 1):
+        folio_number_value = ((line_index - 1) // lines_per_folio) + 1
+        line_number = ((line_index - 1) % lines_per_folio) + 1
+        records.append(
+            {
+                "folio": f"f{folio_number_value}r",
+                "line": str(line_number),
+                "text": " ".join(tokens[start:start + words_per_line]),
+            }
+        )
+    return records
+
+
 def load_folio_metadata(path):
     with open(path, "r", encoding="utf-8") as handle:
         rows = json.load(handle)
@@ -320,6 +358,14 @@ def build_mapping(transcription_path, metadata_path):
     return {"words": words}
 
 
+def build_mapping_from_text(text_path):
+    records = load_gutenberg_text_records(text_path)
+    words = first_pass(records, {})
+    add_ed1_stripped(words)
+    add_outliers(words)
+    return {"words": words}
+
+
 class MappingGui(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -331,6 +377,7 @@ class MappingGui(tk.Tk):
         self.is_running = False
 
         base_dir = os.getcwd()
+        self.source_mode_var = tk.StringVar(value="json")
         self.transcription_var = tk.StringVar(value=os.path.join(base_dir, "TTLI.json"))
         self.metadata_var = tk.StringVar(value=os.path.join(base_dir, "quires_scribes.json"))
         self.output_var = tk.StringVar(value=os.path.join(base_dir, "mappings_output.json"))
@@ -342,22 +389,32 @@ class MappingGui(tk.Tk):
         root = ttk.Frame(self, padding=16)
         root.pack(fill=tk.BOTH, expand=True)
         root.columnconfigure(1, weight=1)
-        root.rowconfigure(4, weight=1)
+        root.rowconfigure(5, weight=1)
 
-        ttk.Label(root, text="Transcription JSON").grid(row=0, column=0, sticky="w", pady=(0, 8))
-        self._entry(root, self.transcription_var, 0)
-        ttk.Button(root, text="Browse...", command=self.choose_transcription).grid(row=0, column=2, padx=(8, 0), pady=(0, 8))
+        mode_frame = ttk.Frame(root)
+        mode_frame.grid(row=0, column=0, columnspan=3, sticky="w", pady=(0, 10))
+        ttk.Label(mode_frame, text="Source").pack(side=tk.LEFT, padx=(0, 10))
+        ttk.Radiobutton(mode_frame, text="Transcription JSON", variable=self.source_mode_var, value="json", command=self.update_source_mode).pack(side=tk.LEFT, padx=(0, 12))
+        ttk.Radiobutton(mode_frame, text="Gutenberg text", variable=self.source_mode_var, value="text", command=self.update_source_mode).pack(side=tk.LEFT)
 
-        ttk.Label(root, text="Metadata JSON").grid(row=1, column=0, sticky="w", pady=(0, 8))
-        self._entry(root, self.metadata_var, 1)
-        ttk.Button(root, text="Browse...", command=self.choose_metadata).grid(row=1, column=2, padx=(8, 0), pady=(0, 8))
+        self.source_label = ttk.Label(root, text="Transcription JSON")
+        self.source_label.grid(row=1, column=0, sticky="w", pady=(0, 8))
+        self._entry(root, self.transcription_var, 1)
+        self.source_browse_button = ttk.Button(root, text="Browse...", command=self.choose_transcription)
+        self.source_browse_button.grid(row=1, column=2, padx=(8, 0), pady=(0, 8))
 
-        ttk.Label(root, text="Output JSON").grid(row=2, column=0, sticky="w", pady=(0, 8))
-        self._entry(root, self.output_var, 2)
-        ttk.Button(root, text="Save As...", command=self.choose_output).grid(row=2, column=2, padx=(8, 0), pady=(0, 8))
+        self.metadata_label = ttk.Label(root, text="Metadata JSON")
+        self.metadata_label.grid(row=2, column=0, sticky="w", pady=(0, 8))
+        self.metadata_entry = self._entry(root, self.metadata_var, 2)
+        self.metadata_button = ttk.Button(root, text="Browse...", command=self.choose_metadata)
+        self.metadata_button.grid(row=2, column=2, padx=(8, 0), pady=(0, 8))
+
+        ttk.Label(root, text="Output JSON").grid(row=3, column=0, sticky="w", pady=(0, 8))
+        self._entry(root, self.output_var, 3)
+        ttk.Button(root, text="Save As...", command=self.choose_output).grid(row=3, column=2, padx=(8, 0), pady=(0, 8))
 
         controls = ttk.Frame(root)
-        controls.grid(row=3, column=0, columnspan=3, sticky="ew", pady=(4, 12))
+        controls.grid(row=4, column=0, columnspan=3, sticky="ew", pady=(4, 12))
         controls.columnconfigure(1, weight=1)
 
         self.run_button = ttk.Button(controls, text="Build Mapping", command=self.start_build)
@@ -365,11 +422,12 @@ class MappingGui(tk.Tk):
         ttk.Label(controls, textvariable=self.status_var).grid(row=0, column=1, sticky="w", padx=(12, 0))
 
         self.log = tk.Text(root, height=9, wrap=tk.WORD, state=tk.DISABLED)
-        self.log.grid(row=4, column=0, columnspan=3, sticky="nsew")
+        self.log.grid(row=5, column=0, columnspan=3, sticky="nsew")
 
         scrollbar = ttk.Scrollbar(root, orient=tk.VERTICAL, command=self.log.yview)
-        scrollbar.grid(row=4, column=3, sticky="ns")
+        scrollbar.grid(row=5, column=3, sticky="ns")
         self.log.configure(yscrollcommand=scrollbar.set)
+        self.update_source_mode()
 
     def _entry(self, parent, variable, row):
         entry = ttk.Entry(parent, textvariable=variable)
@@ -377,12 +435,36 @@ class MappingGui(tk.Tk):
         return entry
 
     def choose_transcription(self):
+        if self.source_mode_var.get() == "text":
+            self.choose_text_source()
+            return
         path = filedialog.askopenfilename(
             title="Choose transcription JSON",
             filetypes=[("JSON files", "*.json"), ("All files", "*.*")],
         )
         if path:
             self.transcription_var.set(path)
+
+    def choose_text_source(self):
+        path = filedialog.askopenfilename(
+            title="Choose Gutenberg text file",
+            filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
+        )
+        if path:
+            self.transcription_var.set(path)
+            self.output_var.set(os.path.join(os.path.dirname(path), f"mappings_{os.path.splitext(os.path.basename(path))[0]}.json"))
+
+    def update_source_mode(self):
+        if self.source_mode_var.get() == "text":
+            self.source_label.configure(text="Gutenberg text")
+            self.metadata_label.configure(text="Metadata JSON (not used)")
+            self.metadata_entry.configure(state=tk.DISABLED)
+            self.metadata_button.configure(state=tk.DISABLED)
+        else:
+            self.source_label.configure(text="Transcription JSON")
+            self.metadata_label.configure(text="Metadata JSON")
+            self.metadata_entry.configure(state=tk.NORMAL)
+            self.metadata_button.configure(state=tk.NORMAL)
 
     def choose_metadata(self):
         path = filedialog.askopenfilename(
@@ -405,11 +487,12 @@ class MappingGui(tk.Tk):
         if self.is_running:
             return
 
+        source_mode = self.source_mode_var.get()
         transcription_path = self.transcription_var.get().strip()
         metadata_path = self.metadata_var.get().strip()
         output_path = self.output_var.get().strip()
 
-        error = self.validate_paths(transcription_path, metadata_path, output_path)
+        error = self.validate_paths(transcription_path, metadata_path, output_path, source_mode)
         if error:
             messagebox.showerror("Invalid Input", error)
             return
@@ -418,32 +501,37 @@ class MappingGui(tk.Tk):
         self.run_button.configure(state=tk.DISABLED)
         self.status_var.set("Building...")
         self.clear_log()
-        self.append_log("Building mapping JSON. This may take a moment.")
+        if source_mode == "text":
+            self.append_log("Building mapping JSON from Gutenberg text. Header/footer markers will be stripped if present.")
+        else:
+            self.append_log("Building mapping JSON from transcription JSON. This may take a moment.")
 
         worker = threading.Thread(
             target=self.run_build,
-            args=(transcription_path, metadata_path, output_path),
+            args=(source_mode, transcription_path, metadata_path, output_path),
             daemon=True,
         )
         worker.start()
         self.after(100, self.poll_worker)
 
-    def validate_paths(self, transcription_path, metadata_path, output_path):
+    def validate_paths(self, transcription_path, metadata_path, output_path, source_mode):
         if not transcription_path:
-            return "Transcription JSON is required."
-        if not metadata_path:
+            return "Source file is required."
+        if source_mode == "json" and not metadata_path:
             return "Metadata JSON is required."
         if not output_path:
             return "Output JSON is required."
-        if not transcription_path.lower().endswith(".json"):
+        if source_mode == "json" and not transcription_path.lower().endswith(".json"):
             return "Transcription must be a .json file."
-        if not metadata_path.lower().endswith(".json"):
+        if source_mode == "text" and not transcription_path.lower().endswith(".txt"):
+            return "Gutenberg source should be a .txt file."
+        if source_mode == "json" and not metadata_path.lower().endswith(".json"):
             return "Metadata must be a .json file."
         if not output_path.lower().endswith(".json"):
             return "Output must be a .json file."
         if not os.path.isfile(transcription_path):
-            return f"Transcription file was not found:\n{transcription_path}"
-        if not os.path.isfile(metadata_path):
+            return f"Source file was not found:\n{transcription_path}"
+        if source_mode == "json" and not os.path.isfile(metadata_path):
             return f"Metadata file was not found:\n{metadata_path}"
 
         output_dir = os.path.dirname(os.path.abspath(output_path)) or os.getcwd()
@@ -451,9 +539,12 @@ class MappingGui(tk.Tk):
             return f"Output folder was not found:\n{output_dir}"
         return None
 
-    def run_build(self, transcription_path, metadata_path, output_path):
+    def run_build(self, source_mode, transcription_path, metadata_path, output_path):
         try:
-            generated = build_mapping(transcription_path, metadata_path)
+            if source_mode == "text":
+                generated = build_mapping_from_text(transcription_path)
+            else:
+                generated = build_mapping(transcription_path, metadata_path)
             with open(output_path, "w", encoding="utf-8") as handle:
                 json.dump(generated, handle, indent=2, ensure_ascii=False)
                 handle.write("\n")
